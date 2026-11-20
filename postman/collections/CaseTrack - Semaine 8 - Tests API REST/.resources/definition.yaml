@@ -1,0 +1,11 @@
+$kind: collection
+description: "Collection d'intégration API REST pour CaseTrack. À exécuter contre le serveur de test (port 5001) et la base casetrack_test uniquement. Les requêtes utilisent les comptes de test créés pendant la Semaine 7. L'ordre des requêtes est important : les tokens et l'identifiant de réclamation sont enregistrés automatiquement."
+variables:
+  baseUrl: http://localhost:5001/api
+  userEmail: integration.20261118214641@example.test
+  userPassword: TestPass123!
+  adminEmail: integration.admin@example.test
+  adminPassword: AdminTest123!
+  userToken: ""
+  adminToken: ""
+  complaintId: ""

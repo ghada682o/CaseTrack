@@ -1,0 +1,16 @@
+$kind: http-request
+name: "11 - Negative: READ after DELETE"
+description: Requête automatisée de test API REST.
+url: "{{baseUrl}}/complaints/{{complaintId}}"
+method: GET
+headers:
+  Accept: application/json
+  Authorization: Bearer {{userToken}}
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 404 - réclamation supprimée introuvable", function () {
+          pm.response.to.have.status(404);
+      });
+    language: text/javascript
+order: 11000

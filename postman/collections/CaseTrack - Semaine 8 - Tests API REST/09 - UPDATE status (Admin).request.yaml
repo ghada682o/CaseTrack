@@ -1,0 +1,26 @@
+$kind: http-request
+description: Requête automatisée de test API REST.
+url: "{{baseUrl}}/complaints/{{complaintId}}/status"
+method: PUT
+headers:
+  Accept: application/json
+  Authorization: Bearer {{adminToken}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "status": "resolved"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 200 - statut modifié", function () {
+          pm.response.to.have.status(200);
+      });
+      const data = pm.response.json();
+      pm.test("Nouveau statut resolved", function () {
+          pm.expect(data.complaint.status).to.eql("resolved");
+      });
+    language: text/javascript
+order: 9000

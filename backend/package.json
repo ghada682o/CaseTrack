@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --runInBand",
+    "test:coverage": "jest --coverage --runInBand"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +22,10 @@
     "express-rate-limit": "^8.5.2",
     "helmet": "^8.2.0",
     "jsonwebtoken": "^9.0.3",
-    "nodemailer": "^8.0.11",
+    "nodemailer": "^10.6.0",
     "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2"
   }
 }

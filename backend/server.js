@@ -18,11 +18,11 @@ app.use(helmet());
 
 const allowedOrigins = [
   'http://localhost:5173',
+  'http://127.0.0.1:5174',
   process.env.CLIENT_URL,
   process.env.FRONTEND_URL,
   'https://smart-complaint-management-iota.vercel.app',
 ].filter(Boolean);
-
 app.use(
   cors({
     origin: function (origin, callback) {

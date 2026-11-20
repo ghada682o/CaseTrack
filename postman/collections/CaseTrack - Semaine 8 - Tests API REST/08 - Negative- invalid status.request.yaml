@@ -1,0 +1,23 @@
+$kind: http-request
+name: "08 - Negative: invalid status"
+description: Requête automatisée de test API REST.
+url: "{{baseUrl}}/complaints/{{complaintId}}/status"
+method: PUT
+headers:
+  Accept: application/json
+  Authorization: Bearer {{adminToken}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "status": "invalid_status"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 400 - statut invalide refusé", function () {
+          pm.response.to.have.status(400);
+      });
+    language: text/javascript
+order: 8000

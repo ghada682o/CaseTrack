@@ -1,0 +1,23 @@
+$kind: http-request
+name: "06 - Negative: User forbidden to update status"
+description: Requête automatisée de test API REST.
+url: "{{baseUrl}}/complaints/{{complaintId}}/status"
+method: PUT
+headers:
+  Accept: application/json
+  Authorization: Bearer {{userToken}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "status": "resolved"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 403 - accès interdit pour User", function () {
+          pm.response.to.have.status(403);
+      });
+    language: text/javascript
+order: 6000

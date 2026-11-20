@@ -1,0 +1,15 @@
+$kind: http-request
+name: "07 - Negative: request without JWT"
+description: Requête automatisée de test API REST.
+url: "{{baseUrl}}/complaints/{{complaintId}}"
+method: GET
+headers:
+  Accept: application/json
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 401 - authentification requise", function () {
+          pm.response.to.have.status(401);
+      });
+    language: text/javascript
+order: 7000

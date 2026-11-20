@@ -1,0 +1,31 @@
+$kind: http-request
+name: "12 - Negative: duplicate email registration"
+description: Requête automatisée de test API REST.
+url: "{{baseUrl}}/auth/register"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+  - key: Content-Type
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Duplicate Integration User",
+      "email": "{{userEmail}}",
+      "password": "AnotherPass123!",
+      "role": "user"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 409 - e-mail déjà utilisé", function () {
+          pm.response.to.have.status(409);
+      });
+    language: text/javascript
+order: 12000

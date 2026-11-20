@@ -1,0 +1,36 @@
+$kind: http-request
+description: Requête automatisée de test API REST.
+url: "{{baseUrl}}/auth/login"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+  - key: Content-Type
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "{{userEmail}}",
+      "password": "{{userPassword}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 200 - authentification User", function () {
+          pm.response.to.have.status(200);
+      });
+      const data = pm.response.json();
+      pm.test("Token JWT reçu", function () {
+          pm.expect(data.token).to.be.a("string").and.not.empty;
+      });
+      pm.test("Rôle User", function () {
+          pm.expect(data.user.role).to.eql("user");
+      });
+      pm.collectionVariables.set("userToken", data.token);
+    language: text/javascript
+order: 2000

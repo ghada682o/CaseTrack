@@ -1,0 +1,36 @@
+$kind: http-request
+description: Requête automatisée de test API REST.
+url: "{{baseUrl}}/complaints"
+method: POST
+headers:
+  Accept: application/json
+  Authorization: Bearer {{userToken}}
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "title": "Postman API Test Complaint",
+      "description": "Réclamation créée automatiquement pendant les tests REST de la semaine 8.",
+      "category": "technical",
+      "priority": "medium"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 201 - réclamation créée", function () {
+          pm.response.to.have.status(201);
+      });
+      const data = pm.response.json();
+      pm.test("Réponse success=true", function () {
+          pm.expect(data.success).to.eql(true);
+      });
+      pm.test("Statut initial pending", function () {
+          pm.expect(data.complaint.status).to.eql("pending");
+      });
+      pm.test("Identifiant de réclamation présent", function () {
+          pm.expect(data.complaint.id || data.complaint._id).to.exist;
+      });
+      pm.collectionVariables.set("complaintId", String(data.complaint.id || data.complaint._id));
+    language: text/javascript
+order: 4000

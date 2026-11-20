@@ -1,0 +1,24 @@
+$kind: http-request
+description: Requête automatisée de test API REST.
+url: "{{baseUrl}}/health"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+  - key: Content-Type
+    value: application/json
+  - key: Content-Type
+    value: application/json
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 200 - API disponible", function () {
+          pm.response.to.have.status(200);
+      });
+      pm.test("Réponse JSON", function () {
+          pm.response.to.be.json;
+      });
+    language: text/javascript
+order: 1000
