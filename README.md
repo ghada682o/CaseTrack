@@ -1,3 +1,4 @@
+
 # 🚀 CaseTrack - Smart Complaint Management System
 
 CaseTrack is a full-stack, enterprise-grade **Smart Complaint Management System** designed to streamline, categorize, and track grievances within organizations. Featuring role-based dashboards, automated AI-powered complaint classification, email updates, and real-time in-app notifications, CaseTrack turns manual ticket resolution into an automated, transparent, and structured workflow.
@@ -271,3 +272,7 @@ cd CaseTrack
 
 ## 📄 License
 This project is licensed under the ISC License. Feel free to fork, modify, and distribute as needed.
+=======
+# CaseTrack
+Complaint Management Platform
+
